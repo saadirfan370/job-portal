@@ -1,4 +1,5 @@
-import React from "react";
+// import React from "react";
+import { JOB_LOAD_FAIL, JOB_LOAD_REQUEST, JOB_LOAD_RESET, JOB_LOAD_SUCCESS } from "../constant/jobConstent";
 
 export const loadJobReducer = (state = { job: [] }, action) => {
   switch (action.type) {
@@ -11,7 +12,7 @@ export const loadJobReducer = (state = { job: [] }, action) => {
         page: action.payload.page,
         pages: action.payload.pages,
         count: action.payload.count,
-        SetUniqueLocation: action.payload.SetUniqueLocation,
+        setUniqueLocation: action.payload.setUniqueLocation,
         jobs: action.payload.jobs,
       };
     case JOB_LOAD_FAIL:
