@@ -8,19 +8,28 @@ import {
   Container,
   Typography,
   useTheme,
+  ListItemIcon,
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { jobLoadAction } from "../redux/action/jobAction";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import CardElement from "../components/CardElement";
 import Pagination from '@mui/material/Pagination';
 import Footer from "../components/Footer";
 import LoadingBox from "../components/LoadingBox";
+import SelectComponent from "../components/SelectComponents";
+import MenuList from '@mui/material/MenuList';
+import MenuItem from '@mui/material/MenuItem';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import { jobTypeLoadAction } from "../redux/action/jobTypeaction";
+
+
 
 const Home = () => {
-  const { jobs, SetUniqueLocation, pages, loading } = useSelector(
+  const { jobs, setUniqueLocation, pages, loading } = useSelector(
     (state) => state.loadJobs
   );
+  // console.log(setUniqueLocation,"scjdkn");
   const { palette } = useTheme();
   const dispatch = useDispatch();
   const { keyword, location } = useParams();
@@ -32,12 +41,21 @@ const Home = () => {
     dispatch(jobLoadAction(page, keyword, cat, location));
   }, [page, keyword, cat, location]);
 
+  useEffect(() => {
+    dispatch(jobTypeLoadAction());
+  }, []);
+
+const handleChangeCategory = (e) => {
+  setCat(e.target.value)
+}
+
+
   return (
     <>
       <Box sx={{ bgcolor: "#fafafa", minHeight: "100vh" }}>
         <Navbar />
         <Header />
-        <Container>
+        <Container> 
           <Stack
             direction={{ xs: "column", sm: "row" }}
             spacing={{ xs: 1, sm: 2, md: 4 }}
@@ -52,7 +70,34 @@ const Home = () => {
                     Filter job by category
                   </Typography>
                 </Box>
+                <SelectComponent handleChangeCategory={handleChangeCategory} cat={cat} />
               </Card>
+
+              {/* job by location */}
+              <Card sx={{ minWidth: 150, mb: 3, mt: 3, p: 2 }}>
+                <Box sx={{ pb: 2 }}>
+                  <Typography
+                    component="h4"
+                    sx={{ color: palette.secondary.main, fontWeight: 600 }}
+                  >
+                    Filter job by location
+                  </Typography>
+                  <MenuList>
+                    {
+                      setUniqueLocation && setUniqueLocation.map((locat,i) => (
+                        <MenuItem key={i}> 
+                          <ListItemIcon>
+                            <LocationOnIcon sx={{color:palette.secondary.main,fontSize:18}} />
+                          </ListItemIcon>
+                          <Link to={`/search/location/${locat}`}>{locat}</Link>
+                        </MenuItem>
+                      ))
+                    }
+                  </MenuList>
+                </Box>
+              </Card>
+
+
             </Box>
             <Box sx={{ flex: 2, p: 2 }}>
               {
