@@ -40,7 +40,7 @@ const Home = () => {
   useEffect(() => {
     dispatch(jobLoadAction(page, keyword, cat, location));
   }, [page, keyword, cat, location]);
-
+  
   useEffect(() => {
     dispatch(jobTypeLoadAction());
   }, []);
