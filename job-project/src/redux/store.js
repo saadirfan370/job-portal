@@ -3,14 +3,15 @@ import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { loadJobReducer } from './reducers/jobReducer';
 import { loadJobTypeReducer } from './reducers/jobTypeReducer';
-import { useReducerLogout, useReducerSignIn } from './reducers/userReducers';
+import { useReducerLogout, useReducerSignIn, userReducerProfile } from './reducers/userReducers';
 
 //combine reducers 
 const reducer = combineReducers({
     loadJobs: loadJobReducer,
     jobTypeAll:loadJobTypeReducer,
     signIn:useReducerSignIn,
-    logOut:useReducerLogout
+    logOut:useReducerLogout,
+    userProfile:userReducerProfile,
 });
 
 

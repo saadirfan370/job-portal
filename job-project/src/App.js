@@ -13,8 +13,15 @@ import Login from './pages/Login';
 import Userdashboard from './pages/user/UserDashboardEl';
 import UserRoute from './components/UserRoute';
 import Layout from './pages/global/Layout';
+import UserJobHistory from './pages/user/UserJobHistory';
+import UserInfoDashboard from './pages/user/UserInfoDashboard';
 
+//HOC  high order component
 const UserdashboardHOC = Layout(Userdashboard)
+const UserJobHistoryHOC = Layout(UserJobHistory);
+const UserInfoHistoryHOC = Layout(UserInfoDashboard);
+
+
 
 
 const App = () => {
@@ -31,6 +38,8 @@ const App = () => {
         <Route path='/search/:keyword' element={<Home />} />
         <Route path='/Login' element={<Login />} />
         <Route path='/user/dashboard' element={<UserRoute><UserdashboardHOC /></UserRoute>} />
+        <Route path='/user/job' element={<UserRoute><UserJobHistoryHOC /></UserRoute>} />
+        <Route path='/user/info' element={<UserRoute><UserInfoHistoryHOC /></UserRoute>} />
         <Route path='*' element={<NotFound />} />
       </Routes>
       </BrowserRouter>

@@ -19,7 +19,7 @@ import { userLogOutAction } from "../redux/action/userAction";
 import { useEffect } from "react";
 
 const pages = ["Home"];
-const settings = ["Profile", "Account", "Dashboard"];
+const settings = ["Profile", "Account", "User Dashboard","Admin Dashboard"];
 
 const  Navbar = () => {
   //show / hide button

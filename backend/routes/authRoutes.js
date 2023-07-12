@@ -9,7 +9,7 @@ router.post('/signin', signin)
 
 router.get('/logout', logout);
 
-router.get('/me',isAuthenticated , userProfile);
+router.get('/me', isAuthenticated , userProfile);
 
 
 module.exports  = router;
