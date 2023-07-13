@@ -1,6 +1,10 @@
 // import React from "react";
 
 import {
+  USER_APPLY_JOB_FAIL,
+  USER_APPLY_JOB_REQUEST,
+  USER_APPLY_JOB_RESET,
+  USER_APPLY_JOB_SUCCESS,
   USER_LOAD_FAIL,
   USER_LOAD_REQUEST,
   USER_LOAD_RESET,
@@ -88,3 +92,27 @@ export const useReducerLogout = (state = {}, action) => {
   }
 };
 
+//apply for a job reducers
+
+
+export const userApplyJobReducer = (state = {}, action) => {
+  switch (action.type) {
+    case USER_APPLY_JOB_REQUEST:
+      return { loading: true };
+    case USER_APPLY_JOB_SUCCESS:
+      return {
+        loading: false,
+        userJob: action.payload,
+      };
+    case USER_APPLY_JOB_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
+      };
+    case USER_APPLY_JOB_RESET:
+      return {};
+
+    default:
+      return state;
+  }
+};

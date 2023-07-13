@@ -12,14 +12,18 @@ import { ProSidebarProvider } from 'react-pro-sidebar';
 import Login from './pages/Login';
 import Userdashboard from './pages/user/UserDashboardEl';
 import UserRoute from './components/UserRoute';
+import AdminRoute from './components/AdminRoute';
 import Layout from './pages/global/Layout';
 import UserJobHistory from './pages/user/UserJobHistory';
 import UserInfoDashboard from './pages/user/UserInfoDashboard';
+import AdminDashboard from './pages/admin/AdminDashboard';
+import SingleJob from './pages/SingleJob';
 
 //HOC  high order component
 const UserdashboardHOC = Layout(Userdashboard)
 const UserJobHistoryHOC = Layout(UserJobHistory);
 const UserInfoHistoryHOC = Layout(UserInfoDashboard);
+const AdminDashboardHOC = Layout(AdminDashboard);
 
 
 
@@ -37,6 +41,8 @@ const App = () => {
         <Route path='/search/location/:location' element={<Home />} />
         <Route path='/search/:keyword' element={<Home />} />
         <Route path='/Login' element={<Login />} />
+        <Route path='/job/:id' element={<SingleJob />} />
+        <Route path='/admin/dashboard' element={<AdminRoute ><AdminDashboardHOC /></AdminRoute>} />
         <Route path='/user/dashboard' element={<UserRoute><UserdashboardHOC /></UserRoute>} />
         <Route path='/user/job' element={<UserRoute><UserJobHistoryHOC /></UserRoute>} />
         <Route path='/user/info' element={<UserRoute><UserInfoHistoryHOC /></UserRoute>} />

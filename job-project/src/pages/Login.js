@@ -4,54 +4,58 @@ import { useEffect } from "react";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import LockClockOutlined from "@mui/icons-material/LockClockOutlined";
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import { useFormik } from 'formik';
-import * as yup from 'yup';
-import { useDispatch,useSelector } from "react-redux";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import { useFormik } from "formik";
+import * as yup from "yup";
+import { useDispatch, useSelector } from "react-redux";
 import { userSignInAction } from "../redux/action/userAction";
 import { json, useNavigate } from "react-router-dom";
 
-
 const validationSchema = yup.object({
-    email: yup
-      .string('Enter your email')
-      .email('Enter a valid email')
-      .required('Email is required'),
-    password: yup
-      .string('Enter your password')
-      .min(8, 'Password should be of minimum 8 characters length')
-      .required('Password is required'),
-  });
+  email: yup
+    .string("Enter your email")
+    .email("Enter a valid email")
+    .required("Email is required"),
+  password: yup
+    .string("Enter your password")
+    .min(8, "Password should be of minimum 8 characters length")
+    .required("Password is required"),
+});
 
 const Login = () => {
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const {isAuthenticated} = useSelector(state => state.signIn)
-useEffect(()=>{
-  if(isAuthenticated){
-    navigate("/user/dashboard")
-  }
-},[isAuthenticated])
-    const formik = useFormik({
-        initialValues:{
-            email:"",
-            password:""
-        },
-        validationSchema:validationSchema,
-        onSubmit:(values,actions) => {
-            // alert(JSON.stringify(values,null,2))
-            dispatch(userSignInAction(values))
-            actions.resetForm();
-        }
-    })
+  const { isAuthenticated, userInfo } = useSelector((state) => state.signIn);
+  useEffect(() => {
+    if (isAuthenticated) {
+      if (userInfo.role === 1) {
+        navigate("/admin/dashboard");
+      } else {
+        navigate("/user/dashboard");
+      }
+    }
 
-
+    // if(isAuthenticated){
+    //   navigate("/user/dashboard")
+    // }
+  }, [isAuthenticated]);
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema: validationSchema,
+    onSubmit: (values, actions) => {
+      // alert(JSON.stringify(values,null,2))
+      dispatch(userSignInAction(values));
+      actions.resetForm();
+    },
+  });
 
   return (
     <div>
-        <Navbar />
+      <Navbar />
       <Box
         sx={{
           height: "77vh",
@@ -77,31 +81,33 @@ useEffect(()=>{
               <LockClockOutlined />
             </Avatar>
 
-            <TextField sx={{mb:3}}
+            <TextField
+              sx={{ mb: 3 }}
               fullWidth
               id="email"
               name="email"
               label="E-mail"
               InputLabelProps={{
-                shrink:true,
+                shrink: true,
               }}
-              placeholder = "E-mail"
+              placeholder="E-mail"
               value={formik.values.email}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               error={formik.touched.email && Boolean(formik.errors.email)}
               helperText={formik.touched.email && formik.errors.email}
             />
-            <TextField sx={{mb:2}}
+            <TextField
+              sx={{ mb: 2 }}
               fullWidth
               id="password"
               name="password"
               label="Password"
               type="password"
               InputLabelProps={{
-                shrink:true,
+                shrink: true,
               }}
-              placeholder = "Password"
+              placeholder="Password"
               value={formik.values.password}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}

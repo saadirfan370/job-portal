@@ -77,8 +77,11 @@ const  Navbar = () => {
       setTimeout(()=>{
         navigate('/')
       },500)
-    }else if(pValue === "Dashboard"){
+    }else if(pValue === "User Dashboard"){
       navigate("/user/dashboard")
+    }
+    else if(pValue === "Admin Dashboard"){
+      navigate("/admin/dashboard");
     }
   }
 

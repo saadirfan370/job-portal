@@ -3,12 +3,12 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/userModel1");
 
 exports.isAuthenticated = async (req, res, next) => {
-    const { token } = req.cookies;
+    const { token }  = req.cookies;
     console.log(req);
     //make sure token exists
 
     if(!token){
-            return next(new ErrorResponse('not authorized to access this route' , 401))
+        return next(new ErrorResponse('not authorized to access this route' , 401))
     }
 
     try {
