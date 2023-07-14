@@ -1,6 +1,9 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 import {
+  ALL_USER_LOAD_FAIL,
+  ALL_USER_LOAD_REQUEST,
+  ALL_USER_LOAD_SUCCESS,
   USER_APPLY_JOB_FAIL,
   USER_APPLY_JOB_REQUEST,
   USER_APPLY_JOB_SUCCESS,
@@ -57,11 +60,12 @@ export const userLogOutAction = () => async (dispatch) => {
 export const userProfileAction = () => async (dispatch) => {
   dispatch({ type: USER_LOAD_REQUEST });
   const token = JSON.parse(localStorage.getItem("userInfo")).token;
+  
   try {
     const { data } = await axios.get(`http://localhost:8000/me`, {
       headers: {
-        cookies: `token=${token}`,
-      },
+        cookies: token // Set the cookie in the headers
+    }
     });
     dispatch({
       type: USER_LOAD_SUCCESS,
@@ -85,7 +89,7 @@ export const userApplyJobAction = (job) => async (dispatch) => {
     const { data } = await axios.post(`http://localhost:8000/user/jobHistory`,job,{
       headers: {
         'Content-Type': 'application/json',
-        'cookies': `token:${token}` // Include the token in the cookies
+        'cookies': token // Include the token in the cookies
       },
     } );
     dispatch({
@@ -99,5 +103,30 @@ export const userApplyJobAction = (job) => async (dispatch) => {
       payload: error.response.data.error,
     });
     toast.error(error.response.data.error);
+  }
+};
+
+
+
+// all user action
+export const allUserAction = () => async (dispatch) => {
+  dispatch({ type: ALL_USER_LOAD_REQUEST });
+  const token = JSON.parse(localStorage.getItem("userInfo")).token;
+  
+  try {
+    const { data } = await axios.get(`http://localhost:8000/allUsers`, {
+      headers: {
+        cookies: token // Set the cookie in the headers
+    }
+    });
+    dispatch({
+      type: ALL_USER_LOAD_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: ALL_USER_LOAD_FAIL,
+      payload: error.response.data.error,
+    });
   }
 };

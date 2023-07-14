@@ -92,19 +92,12 @@ exports.showJob = async (req, res, next) => {
   const pageSize = 5;
   const page = Number(req.query.pageNumber) || 1;
   // const count = await Job.find({}).estimatedDocumentCount();
-  const count = await Job.find({
-    ...keyword,
-    jobType: categ,
-    location: locationFilter,
-  }).countDocuments();
+  const count = await Job.find({...keyword,jobType: categ,location: locationFilter,}).countDocuments();
 
   try {
-    const jobs = await Job.find({
-      ...keyword,
-      jobType: categ,
-      location: locationFilter,
-    })
+    const jobs = await Job.find({...keyword,jobType: categ,location: locationFilter,})
       .sort({ createdAt: -1 })
+      .populate('jobType', 'jobTypeName').populate('user', 'firstName')
       .skip(pageSize * (page - 1))
       .limit(pageSize);
     res.status(200).json({

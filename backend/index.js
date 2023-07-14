@@ -5,8 +5,7 @@ const morgan = require("morgan");
 require("dotenv").config();
 var cors = require("cors");
 const bodyParser = require("body-parser");
-const cookieParser = require("cookie-parser");
-const errorHandler = require("./middleware/error");
+
 
 
 //import Routes
@@ -15,6 +14,9 @@ const userRoutes = require("./routes/userRoute");
 const jobTypeRoutes = require("./routes/jobTypeRoute");
 const jobRoutes = require("./routes/jobRoutes");
 
+
+const cookieParser = require("cookie-parser");
+const errorHandler = require("./middleware/error");
 
 mongoose
   .connect(process.env.DATABASE, {

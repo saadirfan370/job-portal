@@ -18,12 +18,16 @@ import UserJobHistory from './pages/user/UserJobHistory';
 import UserInfoDashboard from './pages/user/UserInfoDashboard';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import SingleJob from './pages/SingleJob';
+import DashUsers from './pages/admin/DashUsers';
+import Dashjobs from './pages/admin/Dashjobs';
 
 //HOC  high order component
 const UserdashboardHOC = Layout(Userdashboard)
 const UserJobHistoryHOC = Layout(UserJobHistory);
 const UserInfoHistoryHOC = Layout(UserInfoDashboard);
 const AdminDashboardHOC = Layout(AdminDashboard);
+const DashUsersHOC = Layout(DashUsers);
+const DashjobsHOC = Layout(Dashjobs);
 
 
 
@@ -43,6 +47,8 @@ const App = () => {
         <Route path='/Login' element={<Login />} />
         <Route path='/job/:id' element={<SingleJob />} />
         <Route path='/admin/dashboard' element={<AdminRoute ><AdminDashboardHOC /></AdminRoute>} />
+        <Route path='/admin/users' element={<AdminRoute ><DashUsersHOC /></AdminRoute>} />
+        <Route path='/admin/jobs' element={<AdminRoute ><DashjobsHOC /></AdminRoute>} />
         <Route path='/user/dashboard' element={<UserRoute><UserdashboardHOC /></UserRoute>} />
         <Route path='/user/job' element={<UserRoute><UserJobHistoryHOC /></UserRoute>} />
         <Route path='/user/info' element={<UserRoute><UserInfoHistoryHOC /></UserRoute>} />
