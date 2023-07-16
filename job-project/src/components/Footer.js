@@ -13,7 +13,7 @@ const Footer = () => {
         justifyContent:"center",
         alignItems:"center"
       }}>
-        <Box component="span" sx={{color:palette.primary.main}}>All right reserved! @2023</Box>
+        <Box component="span" sx={{color:"white"}}>All right reserved!  &#169;2023</Box>
       </Box>
     </>
   );

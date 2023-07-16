@@ -21,23 +21,23 @@ const  CardElement = ({jobTitle,description,category,location ,id}) => {
       variant="outlined"
       sx={{
         minWidth: 275,
-        mb:3,
-        mt:3,
+        mb:1,
+        mt:1,
       }}
     >
     
       <CardContent>
-        <Typography sx={{fontSize:15,color:palette.secondary.main,fontWeight:500}}>
-          <IconButton><LocationOnIcon sx={{color:palette.secondary.main,fontSize:18}} />{location}</IconButton>
-        </Typography>
-        <Typography variant="h5" component="div">
+        <Typography variant="h5" component="div" style={{textTransform:"uppercase",fontFamily:"monospace"}}>
         {jobTitle}
         </Typography>
-        <Typography sx={{mb:1.5}} color="text.secondary">
+        <Typography sx={{fontSize:"15px",color:palette.secondary.main,fontWeight:500 }}>
+          <IconButton style={{paddingLeft:0,fontSize:"15px",textTransform:"capitalize",fontFamily:"monospace"}}><LocationOnIcon sx={{color:palette.secondary.main,mr:1,fontSize:"15px"}} />{location}</IconButton>
+        </Typography>
+        <Typography sx={{mb:1.5}} color="text.secondary" style={{fontFamily:"monospace",textTransform:"capitalize"}}>
         {category}
         </Typography>
         <Typography variant="body2">
-        Description:{description.split(" ").slice(0,15).join(" ")+"..."}
+        Description: {description.split(" ").slice(0,15).join(" ")+"..."}
         </Typography>
       </CardContent>
       <CardActions >

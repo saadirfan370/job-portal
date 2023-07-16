@@ -34,6 +34,7 @@ const SearchInput = () => {
     <form onSubmit={handleSubmit} style={{width:"50%"}}>
       <Box sx={{width:"100%",display:"flex",justifyContent:"center"}}>
         <InputBase sx={{bgcolor:"white",padding:"10px"}}
+        style={{WebkitBorderTopLeftRadius:"30px",WebkitBorderBottomLeftRadius:"30px"}}
         fullWidth={true}
         id="search"
         name="search"
@@ -43,7 +44,7 @@ const SearchInput = () => {
         onChange={handleChange}
         error={touched.search && Boolean(errors.search)}
         />
-        <Button color="primary" variant="contained" type="submit" disabled={isSubmitting}>
+        <Button color="primary" variant="contained" type="submit" disabled={isSubmitting} style={{width:"20%",borderRadius:0,borderTopRightRadius:"30px",borderBottomRightRadius:"30px"}}>
             Search
         </Button>
       </Box>

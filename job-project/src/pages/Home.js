@@ -67,7 +67,7 @@ const handleChangeCategory = (e) => {
                     component="h4"
                     sx={{ color: palette.secondary.main, fontWeight: 600 }}
                   >
-                    Filter job by category
+                    Filter Job Category
                   </Typography>
                 </Box>
                 <SelectComponent handleChangeCategory={handleChangeCategory} cat={cat} />
@@ -80,7 +80,7 @@ const handleChangeCategory = (e) => {
                     component="h4"
                     sx={{ color: palette.secondary.main, fontWeight: 600 }}
                   >
-                    Filter job by location
+                    Filter Job Location
                   </Typography>
                   <MenuList>
                     {
@@ -89,7 +89,7 @@ const handleChangeCategory = (e) => {
                           <ListItemIcon>
                             <LocationOnIcon sx={{color:palette.secondary.main,fontSize:18}} />
                           </ListItemIcon>
-                          <Link to={`/search/location/${locat}`}>{locat}</Link>
+                          <Link style={{color:"gray",fontFamily:"monospace", textDecoration:"none"}} to={`/search/location/${locat}`}>{locat}</Link>
                         </MenuItem>
                       ))
                     }
